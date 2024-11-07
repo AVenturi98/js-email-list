@@ -12,7 +12,7 @@ Inserire un bottone che al click faccia il fetch di altre 10 mail (sostituendo l
 const newEl = document.getElementById('element')
 const button = document.querySelector('.btn')
 
-function goEmailsRandom() {
+function goEmailsRandom(n) {
     for (let i = 0; i < 10; i++) {
 
         axios
@@ -23,7 +23,7 @@ function goEmailsRandom() {
             
             elemn = res.data.response
     
-            newEl.innerHTML += `<li>${elemn}</li>`
+            n.innerHTML += `<li>${elemn}</li>`
     
             console.log('è andata', res.data, elemn)
         })
@@ -33,11 +33,11 @@ function goEmailsRandom() {
         
     }
 }
-goEmailsRandom()
+goEmailsRandom(newEl)
 
 button.addEventListener('click', () => {
 
     newEl.innerHTML = ''
-    goEmailsRandom()
+    goEmailsRandom(newEl)
 
 })
