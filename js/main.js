@@ -9,18 +9,35 @@ Inserire un bottone che al click faccia il fetch di altre 10 mail (sostituendo l
 
 */
 
+const newEl = document.getElementById('element')
+const button = document.querySelector('.btn')
 
-axios
-    .get('https://flynn.boolean.careers/exercises/api/random/mail?items=10') 
-    .then((res) => {
-        const newEl = document.getElementById('element')
-        let elemn = document.createElement('li')
-        elemn = res.data.response
+function goEmailsRandom() {
+    for (let i = 0; i < 10; i++) {
 
-        newEl.append(elemn)
+        axios
+        .get('https://flynn.boolean.careers/exercises/api/random/mail?items=10') 
+        .then((res) => {
+            
+            let elemn = document.createElement('li')
+            
+            elemn = res.data.response
+    
+            newEl.innerHTML += `<li>${elemn}</li>`
+    
+            console.log('è andata', res.data, elemn)
+        })
+        .catch((err) => {
+            console.log('riprova', err)
+        }) 
+        
+    }
+}
+goEmailsRandom()
 
-        console.log('è andata', res.data, elemn)
-    })
-    .catch((err) => {
-        console.log('riprova', err)
-    }) 
+button.addEventListener('click', () => {
+
+    newEl.innerHTML = ''
+    goEmailsRandom()
+
+})
